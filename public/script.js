@@ -8,7 +8,7 @@ myVideo.muted =true;
 var peer =new Peer(undefined,{
     path:'/peerjs',
     host:'/',
-    port:'443'
+    port:'3030'
 });
 
 let myVideoStream
@@ -41,6 +41,7 @@ const qwfg = document.querySelector('html').addEventListener('keydown',(e)=>{
     socket.emit('message',msg.value);
     msg.value ='';
     }
+    
 });
 
 socket.on('createMessage', message => {
@@ -133,4 +134,10 @@ const setPlayVideo = () =>{
     
     document.querySelector('.main_video_button').innerHTML = html;
 }
-    
+   
+function leave() {
+    var myWindow = window.open("", "_self");
+    myWindow.document.write("");
+    setTimeout (function() {myWindow.close();},1000);
+  }
+
