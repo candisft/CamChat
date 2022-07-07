@@ -33,16 +33,23 @@ navigator.mediaDevices.getUserMedia({
         setTimeout(connectToNewUser,1000,userId,stream);
     })
    
-    let msg = document.getElementById('chat__message')
-
-
-const qwfg = document.querySelector('html').addEventListener('keydown',(e)=>{
-    if(e.code== "Enter" && msg.value.length !=0){
-    socket.emit('message',msg.value);
-    msg.value ='';
-    }
+    const msg = document.querySelector('input')
+    const chatMsg = document.getElementById('chat__message')
     
-});
+    chatMsg.addEventListener('keydown', e => {
+        if (e.code == "Enter" && msg.value.length !== 0) {
+            socket.emit('message', msg.value);
+            msg.value = '';
+        }
+    })
+    const sendMsg = document.querySelector('.btn')
+    
+    sendMsg.addEventListener('click', () => {
+        if (msg.value.length !== 0) {
+            socket.emit('message', msg.value);
+            msg.value = '';
+        }
+    })
 
 socket.on('createMessage', message => {
     const messages = document.querySelector('ul')
@@ -138,6 +145,6 @@ const setPlayVideo = () =>{
 function leave() {
     var myWindow = window.open("", "_self");
     myWindow.document.write("");
-    setTimeout (function() {myWindow.close();},1000);
+    setTimeout (function() {myWindow.close();},100);
   }
 
